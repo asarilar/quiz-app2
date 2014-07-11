@@ -1,0 +1,54 @@
+     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Quiz App</a>
+        </div>
+        <div class="collapse navbar-collapse">
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container" ng-controller="QuizCtrl as ctrl">
+<!--       <form action="">
+        Question: <input type="text" ng-model="newQuestion.q">
+        <button ng-click="ctrl.addOption()">Add Option</button>
+        <ul>
+          <li ng-repeat="option in newQuestion.options">
+            <input type="radio" name="newQuestion" ng-model="option.correctAnswer"> 
+            <input type="text" ng-model="option.answer_text">
+          </li>
+        </ul>
+      </form>
+      <button ng-click="addNewQuestion()">Add New Question</button> -->
+
+      <div class="jumbotron question">Your Score: {{score}}
+        <div style="float:right">Time Remaining: <h1 style="display:inline">{{time_remaining}}</h1</div>
+      </div>
+      <div class="jumbotron question" ng-repeat="question in ctrl.quiz | orderBy : 'difficulty' " ng-controller="QuestionController as qctrl">
+        <form action="">
+        <h2>Q{{$index+1}}: {{question.q}}</h2>
+          <ul id='question-list'>
+            <li ng-repeat="option in question.options">
+              <input type="radio" name="{{'option-' + $index}}" value="{{option}}" ng-model="question.choice">
+              <span> {{$index+1}} </span>{{option}} 
+            </li>
+          </ul>
+          <button ng-disabled="question.answered" ng-click="qctrl.checkAnswer(question)">Check Answer</button>
+        </form>
+
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
